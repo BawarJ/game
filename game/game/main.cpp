@@ -34,8 +34,11 @@ int main()
 
 		// draw everything here...
 		window.draw(sprite);
-		sprite.setTextureRect(sf::IntRect(x, 0, 45, 75));
-		
+		sprite.setTextureRect(sf::IntRect(x+56, 2, 46, 72));
+		if (x == 11)
+			x = 0;
+		else
+			x++;
 
 		// end the current frame
 		window.display();
