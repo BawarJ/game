@@ -2,7 +2,7 @@
 
 int main()
 {
-	int goblinInc = 0, jackieInc = 1;
+	int goblinInc = 0, jackieInc = 1, delay = 0;
 
 
 
@@ -66,10 +66,16 @@ int main()
 
 
 		goblinSprite.setTextureRect(sf::IntRect(goblinInc*65, 0, 70, 60));
-		if (goblinInc == 7)
-			goblinInc = 0;
+		if (delay == 120)
+		{
+			delay = 0;
+			if (goblinInc == 6)
+				goblinInc = 0;
+			else
+				goblinInc++;
+		}
 		else
-			goblinInc++;
+			delay++;
 
 		jackieSprite.setPosition(sf::Vector2f(0, 100));
 		jackieSprite.setTextureRect(sf::IntRect(jackieInc * 50, 2, 50, 72));

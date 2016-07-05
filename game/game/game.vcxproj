@@ -127,6 +127,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="particle.cpp" />
+    <ClCompile Include="particleEmitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="sprites\goblin.png" />
