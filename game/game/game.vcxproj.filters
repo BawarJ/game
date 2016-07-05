@@ -26,5 +26,8 @@
     <Image Include="sprites\goblin.png">
       <Filter>sprites</Filter>
     </Image>
+    <Image Include="sprites\wall.png">
+      <Filter>sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>

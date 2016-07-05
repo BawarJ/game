@@ -4,8 +4,12 @@ int main()
 {
 	int goblinInc = 0, jackieInc = 1;
 
+
+
 	// create the window
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Fag & Bawar Software");
+
+
 
 	sf::Texture goblinTexture;
 	goblinTexture.setSmooth(false);
@@ -26,6 +30,27 @@ int main()
 
 	sf::Sprite jackieSprite;
 	jackieSprite.setTexture(jackieTexture);
+
+
+
+	sf::Texture circleTexture;
+	circleTexture.setRepeated(true);
+	circleTexture.setSmooth(true);
+	if (!circleTexture.loadFromFile("sprites/wall.png"))
+	{
+		//error
+	}
+
+	sf::CircleShape shape1(50);
+	shape1.setPosition(sf::Vector2f(200, 500));
+	shape1.setFillColor(sf::Color(100, 250, 50));
+
+	sf::CircleShape shape2(50);
+	shape2.setPosition(sf::Vector2f(300, 500));
+	shape2.setTexture(&circleTexture);
+	shape2.setTextureRect(sf::IntRect(10, 10, 100, 100));
+
+
 
 	// run the program as long as the window is open
 	while (window.isOpen())
@@ -59,6 +84,8 @@ int main()
 		// draw everything here...
 		window.draw(goblinSprite);
 		window.draw(jackieSprite);
+		window.draw(shape1);
+		window.draw(shape2);
 
 		// end the current frame
 		window.display();
