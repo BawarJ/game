@@ -2,20 +2,30 @@
 
 int main()
 {
-	int x = 0, i;
+	int goblinInc = 0, jackieInc = 1;
 
 	// create the window
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Fag & Bawar Software");
 
-	sf::Texture texture;
-	//texture.setSmooth(true);
-	if (!texture.loadFromFile("sprites/JackieChan.png"))
+	sf::Texture goblinTexture;
+	goblinTexture.setSmooth(false);
+	if (!goblinTexture.loadFromFile("sprites/goblin.png"))
 	{
 		//error
 	}
 
-	sf::Sprite sprite;
-	sprite.setTexture(texture);
+	sf::Texture jackieTexture;
+	jackieTexture.setSmooth(false);
+	if (!jackieTexture.loadFromFile("sprites/JackieChan.png"))
+	{
+		//error
+	}
+
+	sf::Sprite goblinSprite;
+	goblinSprite.setTexture(goblinTexture);
+
+	sf::Sprite jackieSprite;
+	jackieSprite.setTexture(jackieTexture);
 
 	// run the program as long as the window is open
 	while (window.isOpen())
@@ -29,16 +39,26 @@ int main()
 				window.close();
 		}
 
+
+		goblinSprite.setTextureRect(sf::IntRect(goblinInc*65, 0, 70, 60));
+		if (goblinInc == 7)
+			goblinInc = 0;
+		else
+			goblinInc++;
+
+		jackieSprite.setPosition(sf::Vector2f(50, 100));
+		jackieSprite.setTextureRect(sf::IntRect(jackieInc * 50, 2, 50, 72));
+		if (jackieInc == 4)
+			jackieInc = 1;
+		else
+			jackieInc++;
+
 		// clear the window with black color
 		window.clear(sf::Color::Black);
 
 		// draw everything here...
-		window.draw(sprite);
-		sprite.setTextureRect(sf::IntRect(x+50, 2, 46, 72));
-		if (x == 11)
-			x = 0;
-		else
-			x++;
+		window.draw(goblinSprite);
+		window.draw(jackieSprite);
 
 		// end the current frame
 		window.display();
