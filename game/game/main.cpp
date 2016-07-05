@@ -71,7 +71,7 @@ int main()
 		else
 			goblinInc++;
 
-		jackieSprite.setPosition(sf::Vector2f(50, 100));
+		jackieSprite.setPosition(sf::Vector2f(0, 100));
 		jackieSprite.setTextureRect(sf::IntRect(jackieInc * 50, 2, 50, 72));
 		if (jackieInc == 4)
 			jackieInc = 1;
