@@ -2,8 +2,20 @@
 
 int main()
 {
+	int x = 0, i;
+
 	// create the window
-	sf::RenderWindow window(sf::VideoMode(800, 600), "My window");
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Fag & Bawar Software");
+
+	sf::Texture texture;
+	texture.setSmooth(true);
+	if (!texture.loadFromFile("sprites/JackieChan.png"))
+	{
+		//error
+	}
+
+	sf::Sprite sprite;
+	sprite.setTexture(texture);
 
 	// run the program as long as the window is open
 	while (window.isOpen())
@@ -21,7 +33,9 @@ int main()
 		window.clear(sf::Color::Black);
 
 		// draw everything here...
-		// window.draw(...);
+		window.draw(sprite);
+		sprite.setTextureRect(sf::IntRect(x, 0, 45, 75));
+		
 
 		// end the current frame
 		window.display();
