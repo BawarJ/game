@@ -8,7 +8,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Fag & Bawar Software");
 
 	sf::Texture texture;
-	texture.setSmooth(true);
+	//texture.setSmooth(true);
 	if (!texture.loadFromFile("sprites/JackieChan.png"))
 	{
 		//error
@@ -34,7 +34,7 @@ int main()
 
 		// draw everything here...
 		window.draw(sprite);
-		sprite.setTextureRect(sf::IntRect(x+56, 2, 46, 72));
+		sprite.setTextureRect(sf::IntRect(x+50, 2, 46, 72));
 		if (x == 11)
 			x = 0;
 		else
