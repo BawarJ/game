@@ -10,8 +10,8 @@ int main()
 {
 	int worldMap[5][5] =
 	{
-		{ 1,1,1,1,1 },
-		{ 0,1,0,0,0 },
+		{ 0,0,0,0,0 },
+		{ 0,0,0,0,0 },
 		{ 0,0,0,0,0 },
 		{ 0,0,0,1,0 },
 		{ 1,1,1,1,1 },
@@ -42,6 +42,7 @@ int main()
 
 	sf::Sprite goblinSprite;
 	goblinSprite.setTexture(goblinTexture);
+	goblinSprite.setPosition(sf::Vector2f(400, 350));
 
 	sf::Sprite jackieSprite;
 	jackieSprite.setTexture(jackieTexture);
@@ -80,8 +81,8 @@ int main()
 		}
 
 
-		goblinSprite.setTextureRect(sf::IntRect(goblinInc*65, 0, 70, 60));
-		if (delay == 120)
+		goblinSprite.setTextureRect(sf::IntRect(goblinInc*65, 195, 70, 60));
+		if (delay == 240)
 		{
 			delay = 0;
 			if (goblinInc == 6)
@@ -92,6 +93,19 @@ int main()
 		else
 			delay++;
 
+		//goblincollision
+		for (i = 0; i < 5; i++) {
+			for (j = 0; j < 5; j++) {
+				if (goblinSprite.getGlobalBounds().intersects(walls[i][j].getGlobalBounds()))
+					goblinSprite.move(sf::Vector2f(0, -0.5));
+				else
+					goblinSprite.move(sf::Vector2f(0, 0.01));
+			}
+		}
+		if (!goblinSprite.getGlobalBounds().intersects(sf::FloatRect(0, 0, 500, 500)))
+			goblinSprite.setPosition(sf::Vector2f(400, 350));
+		goblinSprite.move(sf::Vector2f(-0.05, 0));
+
 		jackieSprite.setPosition(sf::Vector2f(0, 100));
 		jackieSprite.setTextureRect(sf::IntRect(jackieInc * 50, 2, 50, 72));
 		if (jackieInc == 4)
@@ -99,10 +113,12 @@ int main()
 		else
 			jackieInc++;
 
-
+		//mouse and random
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			x = rand() % 800;
-			y = rand() % 600;
+			//x = rand() % 800;
+			//y = rand() % 600;
+			x = sf::Mouse::getPosition(window).x-35;
+			y = sf::Mouse::getPosition(window).y-25;
 			goblinSprite.setPosition(sf::Vector2f(x, y));
 		}
 
