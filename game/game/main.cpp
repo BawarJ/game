@@ -2,16 +2,29 @@
 #include <SFML/Window.hpp>
 #include <stdlib.h>
 #include <time.h>
+#include <vector>
+
+using namespace std;
 
 int main()
 {
-	int goblinInc = 0, jackieInc = 1, delay = 0;
+	int worldMap[5][5] =
+	{
+		{ 1,1,1,1,1 },
+		{ 0,1,0,0,0 },
+		{ 0,0,0,0,0 },
+		{ 0,0,0,1,0 },
+		{ 1,1,1,1,1 },
+	};
+
+	int goblinInc = 0, jackieInc = 1, delay = 0, i, j;
 	float x, y;
+	sf::Sprite walls[5][5];
 	
 	srand(time(NULL));
 
 	// create the window
-	sf::RenderWindow window(sf::VideoMode(800, 600), "Fag & Bawar Software");
+	sf::RenderWindow window(sf::VideoMode(500, 500), "Fag & Bawar Software");
 	
 	sf::Texture goblinTexture;
 	goblinTexture.setSmooth(false);
@@ -33,24 +46,27 @@ int main()
 	sf::Sprite jackieSprite;
 	jackieSprite.setTexture(jackieTexture);
 
-
-	sf::Texture circleTexture;
-	circleTexture.setRepeated(true);
-	circleTexture.setSmooth(true);
-	if (!circleTexture.loadFromFile("sprites/wall.png"))
+	sf::Texture wallTexture;
+	wallTexture.setRepeated(false);
+	wallTexture.setSmooth(true);
+	if (!wallTexture.loadFromFile("sprites/wall.png"))
 	{
 		//error
 	}
 
-	sf::CircleShape shape1(5);
-	shape1.setPosition(sf::Vector2f(400, 300));
-	shape1.setFillColor(sf::Color(100, 250, 50));
+	
 
-	sf::CircleShape shape2(10);
-	shape2.setPosition(sf::Vector2f(300, 500));
-	shape2.setTexture(&circleTexture);
-	shape2.setTextureRect(sf::IntRect(10, 10, 100, 100));
-
+	for (i = 0; i < 5; i++) {
+		for (j = 0; j < 5; j++) {
+			if (worldMap[i][j] == 1) {
+				walls[i][j] = sf::Sprite(wallTexture);
+				walls[i][j].setTexture(wallTexture);
+				walls[i][j].setTextureRect(sf::IntRect(0, 0, 100, 100));
+				walls[i][j].setPosition(sf::Vector2f(j * 100, i * 100));
+			}
+		}
+	}
+	
 	// run the program as long as the window is open
 	while (window.isOpen())
 	{
@@ -87,7 +103,7 @@ int main()
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			x = rand() % 800;
 			y = rand() % 600;
-			shape1.setPosition(sf::Vector2f(x, y));
+			goblinSprite.setPosition(sf::Vector2f(x, y));
 		}
 
 
@@ -97,9 +113,12 @@ int main()
 		// draw everything here...
 		window.draw(goblinSprite);
 		window.draw(jackieSprite);
-		window.draw(shape1);
-		window.draw(shape2);
-
+		for (i = 0; i < 5; i++) {
+			for (j = 0; j < 5; j++) {
+				if (worldMap[i][j] == 1)
+					window.draw(walls[i][j]);
+			}
+		}
 		// end the current frame
 		window.display();
 	}
