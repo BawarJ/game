@@ -155,6 +155,23 @@ int main()
 		}
 
 
+		//keyboard controls
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			// left key is pressed: move our character
+			jackieSprite.move(-0.1, 0);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			// right key is pressed: move our character
+			jackieSprite.move(0.1, 0);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			// up key is pressed: move our character
+			jackieSprite.move(0, -0.5);
+		}
+
 		// clear the window with black color
 		window.clear(sf::Color(0,104,248));
 
