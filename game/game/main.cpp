@@ -46,6 +46,7 @@ int main()
 
 	sf::Sprite jackieSprite;
 	jackieSprite.setTexture(jackieTexture);
+	jackieSprite.setPosition(sf::Vector2f(0, 100));
 
 	sf::Texture wallTexture;
 	wallTexture.setRepeated(false);
@@ -100,13 +101,18 @@ int main()
 					goblinSprite.move(sf::Vector2f(0, -0.5));
 				else
 					goblinSprite.move(sf::Vector2f(0, 0.01));
+
+				if (jackieSprite.getGlobalBounds().intersects(walls[i][j].getGlobalBounds()))
+					jackieSprite.move(sf::Vector2f(0, -0.5));
+				else
+					jackieSprite.move(sf::Vector2f(0, 0.01));
 			}
 		}
 		if (!goblinSprite.getGlobalBounds().intersects(sf::FloatRect(0, 0, 500, 500)))
 			goblinSprite.setPosition(sf::Vector2f(400, 350));
 		goblinSprite.move(sf::Vector2f(-0.05, 0));
 
-		jackieSprite.setPosition(sf::Vector2f(0, 100));
+		
 		jackieSprite.setTextureRect(sf::IntRect(jackieInc * 50, 2, 50, 72));
 		if (jackieInc == 4)
 			jackieInc = 1;
