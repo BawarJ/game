@@ -29,5 +29,8 @@
     <Image Include="sprites\wall.png">
       <Filter>sprites</Filter>
     </Image>
+    <Image Include="sprites\sky.png">
+      <Filter>sprites</Filter>
+    </Image>
   </ItemGroup>
 </Project>

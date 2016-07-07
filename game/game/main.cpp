@@ -17,7 +17,7 @@ int main()
 		{ 1,1,1,1,1 },
 	};
 
-	int goblinInc = 0, jackieInc = 1, delay = 0, i, j;
+	int goblinInc = 0, jackieInc = 1, skyInc = 0, goblinDelay = 0, skyDelay = 0, i, j;
 	float x, y;
 	sf::Sprite walls[5][5];
 	
@@ -40,6 +40,14 @@ int main()
 		//error
 	}
 
+	sf::Texture skyTexture;
+	skyTexture.setSmooth(false);
+	skyTexture.setRepeated(true);
+	if (!skyTexture.loadFromFile("sprites/sky.png"))
+	{
+		//error
+	}
+
 	sf::Sprite goblinSprite;
 	goblinSprite.setTexture(goblinTexture);
 	goblinSprite.setPosition(sf::Vector2f(400, 350));
@@ -47,6 +55,10 @@ int main()
 	sf::Sprite jackieSprite;
 	jackieSprite.setTexture(jackieTexture);
 	jackieSprite.setPosition(sf::Vector2f(0, 100));
+
+	sf::Sprite skySprite;
+	skySprite.setTexture(skyTexture);
+	skySprite.setPosition(sf::Vector2f(0, 198));
 
 	sf::Texture wallTexture;
 	wallTexture.setRepeated(false);
@@ -83,16 +95,16 @@ int main()
 
 
 		goblinSprite.setTextureRect(sf::IntRect(goblinInc*65, 195, 70, 60));
-		if (delay == 240)
+		if (goblinDelay == 240)
 		{
-			delay = 0;
+			goblinDelay = 0;
 			if (goblinInc == 6)
 				goblinInc = 0;
 			else
 				goblinInc++;
 		}
 		else
-			delay++;
+			goblinDelay++;
 
 		//goblincollision
 		for (i = 0; i < 5; i++) {
@@ -119,6 +131,20 @@ int main()
 		else
 			jackieInc++;
 
+		skySprite.setTextureRect(sf::IntRect(skyInc, 218, 500, 202));
+		
+		if (skyDelay == 120)
+		{
+			skyDelay = 0;
+			if (skyInc == 1020)
+				skyInc = 0;
+			else
+				skyInc++;
+		}
+		else
+			skyDelay++;
+
+
 		//mouse and random
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			//x = rand() % 800;
@@ -130,9 +156,10 @@ int main()
 
 
 		// clear the window with black color
-		window.clear(sf::Color::White);
+		window.clear(sf::Color(0,104,248));
 
 		// draw everything here...
+		window.draw(skySprite);
 		window.draw(goblinSprite);
 		window.draw(jackieSprite);
 		for (i = 0; i < 5; i++) {
